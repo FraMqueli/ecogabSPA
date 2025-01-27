@@ -238,20 +238,22 @@
     <style>
         /* Estilo para redes sociales */
         .footer {
-            background-color: var(--primary-color);
+            background-color: var(--primary-color); /* O el color que desees */
             color: var(--background-color);
+            padding: var(--spacing-lg) 0;
             width: 100%;
-            margin-top: auto;
+            margin-top: auto; /* Esto empuja el footer al final */
+            border-top: none; /* Si había un borde superior no deseado */
         }
 
         .footer-container {
-            max-width: var(--container-max-width);
-            margin: 0 auto;
-            padding: var(--spacing-lg);
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            width: 100%;
+            padding: 0 var(--spacing-lg);
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: var(--spacing-lg);
-            background-color: var(--primary-color); /* Aseguramos el color de fondo aquí también */
         }
 
         .footer-section {
