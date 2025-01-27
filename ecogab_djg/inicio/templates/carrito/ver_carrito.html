@@ -44,22 +44,29 @@
 </div>
 
 <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--primary-color); /* Fondo para toda la página */
+}
 /* Prefijo cart- para evitar interferencias con otros estilos */
 .cart-container {
     max-width: 800px;
     margin: 2rem auto;
     padding: 1rem;
+    background-color: var(--primary-color); /* Asegurar que el contenedor tenga el fondo adecuado */
 }
 
 /* Estilo para el contenedor de los items del carrito */
 .cart-items {
     margin: 2rem 0;
     display: flex;
-    flex-direction: column; /* Asegura que los items estén en columna */
-    align-items: center; /* Centra los elementos horizontalmente */
-    gap: 1rem; /* Espacio entre los items */
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
     width: 100%;
-    box-sizing: border-box; /* Incluye el padding y border en el ancho total */
+    box-sizing: border-box;
 }
 
 /* Estilo para cada item dentro del carrito */
