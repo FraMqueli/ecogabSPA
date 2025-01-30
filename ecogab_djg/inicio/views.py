@@ -186,26 +186,25 @@ def get_proceso_info(proceso):
     return PROCESO_MAPPING.get(proceso, {})
 
 def obtener_tipos(request):
-    """Vista para obtener tipos de proceso vía AJAX"""
     proceso = request.GET.get('proceso')
-    proceso_info = get_proceso_info(proceso)
-    
+    proceso_info = PROCESO_MAPPING.get(proceso, {})
+
     if not proceso_info:
-        return JsonResponse({'tipos': []})
-    
+        return JsonResponse({'tipos': [], 'campos_adicionales': {}})
+
     tipos = proceso_info['tipo_modelo'].objects.filter(activo=True)
     tipos_data = [{'id': tipo.id, 'nombre': tipo.nombre} for tipo in tipos]
-    
-    # Obtener campos adicionales si existen
+
+    # Obtener valores únicos de los campos adicionales
     campos_adicionales = {}
-    if proceso_info.get('campos_adicionales'):
+    if 'campos_adicionales' in proceso_info:
         modelo_relacionado = proceso_info['modelo']
         for campo in proceso_info['campos_adicionales']:
             valores = Producto.objects.filter(procesos=proceso)\
                 .values_list(f'{modelo_relacionado}__{campo}', flat=True)\
                 .distinct()
             campos_adicionales[campo] = list(valores)
-    
+
     return JsonResponse({
         'tipos': tipos_data,
         'campos_adicionales': campos_adicionales
