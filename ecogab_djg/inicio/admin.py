@@ -54,7 +54,7 @@ class DemoledorInline(EquipoBaseInline):
     model = Demoledor
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')  # Se agrega on_delete
+            'fields': ('tipo', 'combustible', 'modelo') 
         }),
         ('Especificaciones', {
             'fields': ('capacidad', 'tamaño')
@@ -69,7 +69,7 @@ class AlisadorInline(EquipoBaseInline):
     model = Alisador
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')
+            'fields': ('tipo', 'combustible', 'modelo')
         }),
         ('Especificaciones', {
             'fields': ('capacidad',)
@@ -84,7 +84,7 @@ class VibradorInline(EquipoBaseInline):
     model = Vibrador
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')
+            'fields': ('tipo', 'combustible', 'modelo')
         }),
         ('Especificaciones', {
             'fields': ('capacidad',)
@@ -99,7 +99,7 @@ class ElevacionInline(EquipoBaseInline):
     model = Elevacion
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')
+            'fields': ('tipo', 'combustible', 'modelo')
         }),
         ('Especificaciones', {
             'fields': ('altura', 'uso')
@@ -114,7 +114,7 @@ class CargaInline(EquipoBaseInline):
     model = Carga
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')
+            'fields': ('tipo', 'combustible', 'modelo')
         }),
         ('Especificaciones', {
             'fields': ('capacidad', 'implementos')
@@ -129,7 +129,7 @@ class GeneradorInline(EquipoBaseInline):
     model = Generador
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')  # Se agrega on_delete
+            'fields': ('tipo', 'combustible', 'modelo') 
         }),
         ('Especificaciones', {
             'fields': ('capacidad', 'uso', 'kilowatts')
@@ -146,7 +146,7 @@ class EquiposEspecialesInline(EquipoBaseInline):
     model = EquiposEspeciales
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')
+            'fields': ('tipo', 'combustible', 'modelo')
         }),
         ('Especificaciones', {
             'fields': ('caracteristicas_especiales',)
@@ -161,7 +161,7 @@ class CompactacionInline(EquipoBaseInline):
     model = Compactacion
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')  # Se agrega on_delete
+            'fields': ('tipo', 'combustible', 'modelo') 
         }),
         ('Especificaciones', {
             'fields': ('tamaño', 'potencia_compactacion', 'kilowatts')
@@ -172,7 +172,7 @@ class MezclaInline(EquipoBaseInline):
     model = Mezcla
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')
+            'fields': ('tipo', 'combustible', 'modelo')
         }),
         ('Especificaciones', {
             'fields': ('capacidad',)
@@ -187,7 +187,7 @@ class CortadoraInline(EquipoBaseInline):
     model = Cortadora
     fieldsets = (
         ('Información Principal', {
-            'fields': ('tipo', 'combustible', 'modelo', 'on_delete')
+            'fields': ('tipo', 'combustible', 'modelo')
         }),
         ('Especificaciones', {
             'fields': ('profundidad',)
