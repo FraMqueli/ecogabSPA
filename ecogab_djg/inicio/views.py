@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.core.mail import send_mail # Enviar un correo con los datos
 from django.db.models import Q 
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_POST
+import json
 import uuid
 from .models import (
     Producto, Combustible, TipoMezcla, TipoCompactacion, TipoCorte,
@@ -123,6 +126,37 @@ def producto_detail(request, producto_id):
         'combustible': combustible
     }
     return render(request, 'inicio/producto_detail.html', context)
+
+
+
+@csrf_protect  # Exigir CSRF Token para solicitudes POST
+@require_POST   # Solo aceptar solicitudes POST para los likes
+def producto_like(request, producto_id):
+    """Maneja la lógica de dar like a un producto mediante AJAX."""
+    producto = get_object_or_404(Producto, id=producto_id)
+
+    # Obtener cookie de usuario
+    user_cookie = request.COOKIES.get('user_cookie', None)
+    if not user_cookie:
+        user_cookie = str(uuid.uuid4())
+
+    liked_products = request.COOKIES.get(f'liked_products_{user_cookie}', '').split(',')
+    
+    # Si el usuario ya dio like, devolver error
+    if str(producto.id) in liked_products:
+        return JsonResponse({'success': False, 'message': 'Ya diste Me Gusta a este producto'}, status=400)
+
+    # Aumentar el contador de likes
+    producto.cantidad_me_gusta += 1
+    producto.save()
+
+    # Guardar el producto en la cookie
+    liked_products.append(str(producto.id))
+    response = JsonResponse({'success': True, 'likes_count': producto.cantidad_me_gusta})
+    response.set_cookie(f'liked_products_{user_cookie}', ','.join(liked_products), max_age=60*60*24*365)
+
+    return response
+
 
 
 

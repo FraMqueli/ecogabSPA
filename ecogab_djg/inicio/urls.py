@@ -9,4 +9,5 @@ urlpatterns = [
     path('producto/<int:producto_id>/', views.producto_detail, name='producto_detail'),
     path('api/obtener_tipos/', views.obtener_tipos, name='obtener_tipos'),  # Nueva ruta para AJAX
     path('carrito/', views.ver_carrito, name='ver_carrito'),
+    path('producto/<int:producto_id>/like/', views.producto_like, name='producto_like'),
 ]

@@ -55,6 +55,10 @@
 
                     <div class="action-section">
                         <div class="social-actions">
+                            <form id="like-form">
+                                {% csrf_token %}
+                            </form>
+                            
                             <div class="likes-container">
                                 <div class="likes-group">
                                     <span class="likes">
@@ -67,6 +71,7 @@
                                     </button>
                                 </div>
                             </div>
+                            
                         </div>
 
                         <div class="buttons-container">
@@ -354,6 +359,67 @@
             }
         });
     });
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const likeBtn = document.getElementById("like-btn");
+        const likesCount = document.getElementById("likes-count");
+        const productoId = "{{ producto.id }}";
+        
+        function getCSRFToken() {
+            return document.querySelector('[name=csrfmiddlewaretoken]').value;
+        }
 
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith(name + "=")) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Revisar si el usuario ya ha dado like
+        let likedProducts = getCookie("liked_products");
+        likedProducts = likedProducts ? likedProducts.split(",") : [];
+
+        if (likedProducts.includes(productoId)) {
+            likeBtn.disabled = true;
+            likeBtn.textContent = "Ya diste Me Gusta";
+            likeBtn.classList.add("liked");
+        }
+
+        likeBtn.addEventListener("click", function () {
+            fetch(`/producto/${productoId}/like/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCSRFToken(),  // Incluir CSRF Token en la solicitud
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ action: "like" })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    likesCount.textContent = data.likes_count;
+                    likeBtn.disabled = true;
+                    likeBtn.textContent = "Ya diste Me Gusta";
+                    likeBtn.classList.add("liked");
+
+                    // Guardar el producto en la cookie
+                    likedProducts.push(productoId);
+                    document.cookie = `liked_products=${likedProducts.join(",")}; path=/; max-age=31536000`;
+                } else {
+                    console.error("Error en la respuesta del servidor:", data.message);
+                }
+            })
+            .catch(error => console.error("Error en la petición:", error));
+        });
+    });
 </script>
 {% endblock %}
