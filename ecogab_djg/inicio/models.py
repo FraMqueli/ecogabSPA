@@ -127,7 +127,8 @@ class Generador(EquipoBase):
     tipo = models.ForeignKey(TipoGenerador, on_delete=models.PROTECT)
     capacidad = models.CharField(max_length=50)
     uso = models.CharField(max_length=50)
-    kilowatts = models.DecimalField(max_digits=5, decimal_places=2)
+    kilowatts = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)  # Se agrega null=True, blank=True
+
 
 class EquiposEspeciales(EquipoBase):
     tipo = models.ForeignKey(TipoEquiposEspeciales, on_delete=models.PROTECT)
