@@ -177,26 +177,47 @@
     </section>
 
     <script>
-        // Código JavaScript para el carrusel
-        document.querySelectorAll('.product-carousel').forEach(carousel => {
-            const items = carousel.querySelector('.carousel-items');
-            const prevBtn = carousel.querySelector('.carousel-prev');
-            const nextBtn = carousel.querySelector('.carousel-next');
-            let currentIndex = 0;
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.product-carousel').forEach(carousel => {
+                const items = carousel.querySelector('.carousel-items');
+                const prevBtn = carousel.querySelector('.carousel-prev');
+                const nextBtn = carousel.querySelector('.carousel-next');
+                let currentIndex = 0;
+                let totalItems = items.children.length;
+                let autoSlide;
 
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % items.children.length;
-                updateCarousel();
+                function updateCarousel() {
+                    const offset = -currentIndex * 100;
+                    items.style.transform = `translateX(${offset}%)`;
+                    items.style.transition = "transform 0.5s ease-in-out";
+                }
+
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % totalItems;
+                    updateCarousel();
+                    resetAutoSlide();
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                    updateCarousel();
+                    resetAutoSlide();
+                });
+
+                function autoSlideFunction() {
+                    autoSlide = setInterval(() => {
+                        currentIndex = (currentIndex + 1) % totalItems;
+                        updateCarousel();
+                    }, 4000);
+                }
+
+                function resetAutoSlide() {
+                    clearInterval(autoSlide);
+                    autoSlideFunction();
+                }
+
+                autoSlideFunction();
             });
-
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + items.children.length) % items.children.length;
-                updateCarousel();
-            });
-
-            function updateCarousel() {
-                items.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
         });
     </script>
 

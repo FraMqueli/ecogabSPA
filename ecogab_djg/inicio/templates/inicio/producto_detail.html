@@ -283,21 +283,46 @@
 </style>
 
 <script>
-    document.getElementById('like-btn').addEventListener('click', function() {
-        fetch('{% url "producto_detail" producto.id %}', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}'
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.product-carousel').forEach(carousel => {
+            const items = carousel.querySelector('.carousel-items');
+            const prevBtn = carousel.querySelector('.carousel-prev');
+            const nextBtn = carousel.querySelector('.carousel-next');
+            let currentIndex = 0;
+            let totalItems = items.children.length;
+            let autoSlide;
+
+            function updateCarousel() {
+                const offset = -currentIndex * 100;
+                items.style.transform = `translateX(${offset}%)`;
+                items.style.transition = "transform 0.5s ease-in-out";
             }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('likes-count').textContent = data.likes_count;
-                this.disabled = true;
-                this.textContent = 'Ya diste Me Gusta';
-                this.classList.add('liked');
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+                resetAutoSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarousel();
+                resetAutoSlide();
+            });
+
+            function autoSlideFunction() {
+                autoSlide = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % totalItems;
+                    updateCarousel();
+                }, 4000);
             }
+
+            function resetAutoSlide() {
+                clearInterval(autoSlide);
+                autoSlideFunction();
+            }
+
+            autoSlideFunction();
         });
     });
 </script>
