@@ -298,7 +298,7 @@ class ProductoAdmin(admin.ModelAdmin):
 
 
 class CustomAdminSite(AdminSite):
-    login_template = 'custom_admin/loing.html'
+    login_template = 'custom_admin/login.html'
     
     def login(self, request, extra_context=None):
         if extra_context is None:
