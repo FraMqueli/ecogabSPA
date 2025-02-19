@@ -198,26 +198,6 @@ class CortadoraInline(EquipoBaseInline):
         }),
     )
 
-class DemoledorInline(EquipoBaseInline):
-    model = Demoledor
-
-class AlisadorInline(EquipoBaseInline):
-    model = Alisador
-
-class VibradorInline(EquipoBaseInline):
-    model = Vibrador
-
-class ElevacionInline(EquipoBaseInline):
-    model = Elevacion
-
-class CargaInline(EquipoBaseInline):
-    model = Carga
-
-class GeneradorInline(EquipoBaseInline):
-    model = Generador
-
-class EquiposEspecialesInline(EquipoBaseInline):
-    model = EquiposEspeciales
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
