@@ -122,9 +122,12 @@
 /* Layout para items del carrito */
 .ecogab-cart__item-content {
   display: flex; 
-  align-items: flex-start; /* Alinea todo arriba */
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem; 
+  width: 100%;
 }
+
 .ecogab-cart__item-link {
   display: flex; 
   align-items: center; 
@@ -132,9 +135,10 @@
 }
 
 .ecogab-cart__item-details {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Espacio entre nombre, categoría y precio */
+  gap: 0.5rem;
 }
 
 .ecogab-cart__item-name {
@@ -158,11 +162,7 @@
 }
 
 .ecogab-cart__remove-item {
-  color: #e74c3c;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-left: auto;
 }
 
 .ecogab-cart__item:not(:last-child) {
@@ -289,8 +289,6 @@ function renderCart() {
         const cartItem = document.createElement("div");
         cartItem.classList.add("ecogab-cart__item");
 
-        // Ojo: aquí uso <div> en vez de <span> para nombre y categoría
-        // y separo el bloque de la imagen con el de la info y el precio.
         cartItem.innerHTML = `
             <div class="ecogab-cart__item-content">
                 <a href="/producto/${item.id}/" class="ecogab-cart__item-link">
@@ -303,6 +301,7 @@ function renderCart() {
                 </div>
                 <a href="#" class="ecogab-cart__remove-item" onclick="removeFromCart('${item.id}')">
                     <i class="fas fa-trash"></i>
+                </a>
             </div>
         `;
 
