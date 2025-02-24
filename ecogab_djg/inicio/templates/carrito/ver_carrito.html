@@ -216,8 +216,9 @@
     }
 
     .ecogab-cart__item-image {
-        width: 150px;
-        height: 100px;
+        width: 50px;  /* Mantenemos el mismo tamaño que en pantallas grandes */
+        height: 50px;
+        object-fit: cover;
     }
 
     .ecogab-cart__item-details {
@@ -230,12 +231,12 @@
 
     .ecogab-cart__remove-item {
         position: absolute;
-        top: 83%;
-        right: 20%;
+        top: 0.8rem;  /* Ajuste de posición */
+        right: 0.8rem;
     }
 
     .ecogab-cart__remove-item i {
-        font-size: 1.5rem;
+        font-size: 1.2rem;  /* Reducido de 1.5rem */
     }
 
     .ecogab-cart__email-btn,
