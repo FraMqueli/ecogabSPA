@@ -301,9 +301,8 @@ function renderCart() {
                     <div class="ecogab-cart__item-category">${item.categoria}</div>
                     <div class="ecogab-cart__item-price">${item.precio}</div>
                 </div>
-                <div class="ecogab-cart__remove-item" onclick="removeFromCart('${item.id}')">
+                <a href="#" class="ecogab-cart__remove-item" onclick="removeFromCart('${item.id}')">
                     <i class="fas fa-trash"></i>
-                </div>
             </div>
         `;
 
