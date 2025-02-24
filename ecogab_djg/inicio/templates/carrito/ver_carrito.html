@@ -32,6 +32,7 @@
         <div id="cart-items" class="ecogab-cart__items"></div>     
     </div>
 
+    
     <div class="ecogab-cart__summary">
         <button onclick="enviarPorEmail()" class="ecogab-cart__email-btn">
             <i class="fas fa-envelope"></i>
@@ -45,10 +46,9 @@
 </div>
 
 <style>
-/* Contenedor principal del carrito */
+/* Contenedor principal del carrito con namespace */
 .ecogab-cart {
-    width: 90%;
-    max-width: 1000px;
+    max-width: 800px;
     margin: 2rem auto;
     padding: 1rem;
 }
@@ -88,67 +88,86 @@
 }
 
 /* Estilos para los items del carrito */
-.ecogab-cart__items {
-    margin: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-}
-
 .ecogab-cart__item {
-    display: grid;
-    grid-template-columns: 60px 2fr 1fr auto;
-    gap: 1.5rem;
-    align-items: center;
-    background: #ffffff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 1rem; /* Espacio entre items */
 }
 
-.ecogab-cart__item-image {
+/* Estilo para imágenes del carrito (ambas clases para compatibilidad) */
+.ecogab-cart__item-image,
+.cart-item-image {
     width: 50px !important;
     height: 50px !important;
-    max-width: 60px; /* Fuerza el ancho máximo */
-    max-height: 60px; 
-    object-fit: cover;
-    border-radius: 5px;
-    display: block;
+    object-fit: cover !important;
+    border-radius: 5px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+}
 
+/* Esto asegura que la imagen no pueda crecer más allá del tamaño especificado */
+.ecogab-cart__item img {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover !important;
+    border-radius: 5px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+}
+
+/* Layout para items del carrito */
+.ecogab-cart__item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.ecogab-cart__item-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ecogab-cart__item-details {
-    min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .ecogab-cart__item-name {
-    font-weight: bold;
-    color: #333;
-    font-size: 1.1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1rem;
+  margin: 0;
 }
 
 .ecogab-cart__item-category {
-    font-size: 0.9rem;
-    color: #777;
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
 }
 
 .ecogab-cart__item-price {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #2c3e50;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
 }
 
 .ecogab-cart__remove-item {
-    color: #e74c3c;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  margin-left: auto;
+}
+
+.ecogab-cart__item:not(:last-child) {
+  margin-bottom: 15px;
 }
 
 .ecogab-cart__remove-item i {
@@ -193,6 +212,7 @@
     font-weight: bold;
 }
 
+/* Efectos hover para los botones */
 .ecogab-cart__email-btn:hover {
     background-color: #2d3748;
     transform: translateY(-1px);
@@ -206,22 +226,41 @@
 /* Media queries para dispositivos móviles */
 @media (max-width: 500px) {
     .ecogab-cart__item {
-        grid-template-columns: 50px 1fr auto;
-        gap: 0.8rem;
-        padding: 0.8rem;
+        display: grid;
+        grid-template-columns: 70px 1fr auto;
+        align-items: center;
+        grid-template-areas: 
+            "img details remove"
+            "img price remove";
+        gap: 0.5rem;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    .ecogab-cart__item-image,
+    .cart-item-image {
+        grid-area: img;
+        /* El tamaño ya está forzado en los estilos base */
+    }
+    
+    .ecogab-cart__item-details {
+        grid-area: details;
+        width: 100%;
+    }
+    
+    .ecogab-cart__item-price {
+        grid-area: price;
+        align-self: start;
+    }
+    
+    .ecogab-cart__remove-item {
+        grid-area: remove;
+        justify-self: end;
+        align-self: center;
     }
 
     .ecogab-cart__item-name {
-        font-size: 1rem;
-        white-space: normal;
-    }
-
-    .ecogab-cart__item-price {
         font-size: 0.9rem;
-    }
-
-    .ecogab-cart__remove-item i {
-        font-size: 1.1rem;
     }
 
     .ecogab-cart__email-btn,
@@ -230,37 +269,17 @@
         padding: 12px;
         font-size: 1rem;
     }
+
+    .ecogab-cart__summary {
+        flex-direction: column;
+    }
 }
 </style>
 
 <script>
-// Funciones de cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.startsWith(name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-function setCookie(name, value, days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
-}
-
-// Renderizar el carrito
 function renderCart() {
     const cartContainer = document.getElementById("cart-items");
-    const cart = JSON.parse(getCookie('cart') || '[]');
-    cartContainer.innerHTML = "";
+    cartContainer.innerHTML = ""; // Limpiar antes de actualizar
 
     if (cart.length === 0) {
         cartContainer.innerHTML = "<p class='empty-cart'>Tu carrito está vacío.</p>";
@@ -290,17 +309,14 @@ function renderCart() {
         cartContainer.appendChild(cartItem);
     });
 }
-
-// Eliminar un item del carrito
 function removeFromCart(id) {
     let cart = JSON.parse(getCookie('cart') || '[]');
     cart = cart.filter(item => item.id !== id);
     setCookie('cart', JSON.stringify(cart), 7);
-    renderCart();
+    loadCart();
     updateCartCount();
 }
 
-// Validar el formulario
 function validarFormulario() {
     const nombre = document.getElementById('nombre').value.trim();
     const telefono = document.getElementById('telefono').value.trim();
@@ -323,7 +339,6 @@ function validarFormulario() {
     return true;
 }
 
-// Enviar por WhatsApp
 function enviarPorWhatsApp() {
     if (!validarFormulario()) return;
     
@@ -359,11 +374,11 @@ function enviarPorWhatsApp() {
     
     // Limpiar carrito después de enviar
     setCookie('cart', '[]', 7);
-    renderCart();
+    loadCart();
+    updateCartCount();
     document.getElementById('cartForm').reset();
 }
 
-// Enviar por Email
 function enviarPorEmail() {
     if (!validarFormulario()) return;
     
@@ -399,14 +414,13 @@ function enviarPorEmail() {
     
     // Limpiar carrito después de enviar
     setCookie('cart', '[]', 7);
-    renderCart();
+    loadCart();
+    updateCartCount();
     document.getElementById('cartForm').reset();
 }
 
-// Inicializar el carrito al cargar la página
-document.addEventListener('DOMContentLoaded', renderCart);
+document.addEventListener('DOMContentLoaded', loadCart);
 
-// Contador de caracteres para el mensaje
 document.getElementById('mensaje').addEventListener('input', function() {
     const maxLength = 200;
     const currentLength = this.value.length;
