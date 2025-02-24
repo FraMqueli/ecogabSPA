@@ -89,70 +89,88 @@
 
 /* Estilos para los items del carrito */
 .ecogab-cart__item {
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    margin-bottom: 1rem; /* Espacio entre items */
-    gap: 1rem;
+  display: block; /* Para que cada ítem sea un bloque con 100% de ancho */
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 1rem; /* Espacio entre items */
 }
 
-/* Estilo para imágenes del carrito */
-.ecogab-cart__item-image {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 5px;
-    flex-shrink: 0;
+/* Estilo para imágenes del carrito (ambas clases para compatibilidad) */
+.ecogab-cart__item-image,
+.cart-item-image {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover !important;
+    border-radius: 5px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+}
+
+/* Esto asegura que la imagen no pueda crecer más allá del tamaño especificado */
+.ecogab-cart__item img {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover !important;
+    border-radius: 5px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
 }
 
 /* Layout para items del carrito */
 .ecogab-cart__item-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+  display: flex; 
+  align-items: flex-start; /* Alinea todo arriba */
+  gap: 1rem; 
+}
+.ecogab-cart__item-link {
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
 
-/* Contenedor de detalles del producto */
 .ecogab-cart__item-details {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    gap: 0.3rem; /* Espaciado entre elementos */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Espacio entre nombre, categoría y precio */
 }
 
 .ecogab-cart__item-name {
-    font-weight: bold;
-    color: #333;
-    font-size: 1.1rem;
-    margin: 0;
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1rem;
+  margin: 0;
 }
 
 .ecogab-cart__item-category {
-    font-size: 0.9rem;
-    color: #777;
-    margin: 0;
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
 }
 
 .ecogab-cart__item-price {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #2c3e50;
-    margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
 }
 
-/* Botón de eliminar */
 .ecogab-cart__remove-item {
-    color: #e74c3c;
-    cursor: pointer;
+  color: #e74c3c;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ecogab-cart__item:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.ecogab-cart__remove-item i {
     font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Estilos para los botones */
@@ -215,14 +233,18 @@
             "img price remove";
         gap: 0.5rem;
         padding: 1rem;
+        position: relative;
     }
     
-    .ecogab-cart__item-image {
+    .ecogab-cart__item-image,
+    .cart-item-image {
         grid-area: img;
+        /* El tamaño ya está forzado en los estilos base */
     }
     
     .ecogab-cart__item-details {
         grid-area: details;
+        width: 100%;
     }
     
     .ecogab-cart__item-price {
@@ -251,7 +273,6 @@
         flex-direction: column;
     }
 }
-
 </style>
 
 <script>
