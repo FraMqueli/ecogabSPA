@@ -53,224 +53,101 @@
     padding: 1rem;
 }
 
-/* Estilos para el formulario de contacto */
-.ecogab-cart__contact-form {
-    background-color: #f8f9fa;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.ecogab-cart__form-group {
-    margin-bottom: 1.5rem;
-}
-
-.ecogab-cart__form-input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.ecogab-cart__form-input:focus {
-    border-color: #4a5568;
-    outline: none;
-}
-
-.ecogab-cart__char-count {
-    text-align: right;
-    font-size: 0.8rem;
-    color: #666;
-    margin-top: 0.25rem;
-}
-
 /* Estilos para los items del carrito */
 .ecogab-cart__item {
-  display: block; /* Para que cada ítem sea un bloque con 100% de ancho */
-  background: #ffffff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  margin-bottom: 1rem; /* Espacio entre items */
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 1rem;
+    gap: 1rem;
 }
 
-/* Estilo para imágenes del carrito (ambas clases para compatibilidad) */
-.ecogab-cart__item-image,
-.cart-item-image {
-    width: 50px !important;
-    height: 50px !important;
-    object-fit: cover !important;
-    border-radius: 5px !important;
-    max-width: 50px !important;
-    max-height: 50px !important;
-}
-
-/* Esto asegura que la imagen no pueda crecer más allá del tamaño especificado */
-.ecogab-cart__item img {
-    width: 50px !important;
-    height: 50px !important;
-    object-fit: cover !important;
-    border-radius: 5px !important;
-    max-width: 50px !important;
-    max-height: 50px !important;
+/* Estilo para imágenes del carrito */
+.ecogab-cart__item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 /* Layout para items del carrito */
 .ecogab-cart__item-content {
-  display: flex; 
-  align-items: flex-start; /* Alinea todo arriba */
-  gap: 1rem; 
-}
-.ecogab-cart__item-link {
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1;
 }
 
 .ecogab-cart__item-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* Espacio entre nombre, categoría y precio */
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
 .ecogab-cart__item-name {
-  font-weight: bold;
-  color: #333;
-  font-size: 1.1rem;
-  margin: 0;
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+    margin: 0;
 }
 
 .ecogab-cart__item-category {
-  font-size: 0.9rem;
-  color: #777;
-  margin: 0;
+    font-size: 0.9rem;
+    color: #777;
+    margin: 0;
 }
 
 .ecogab-cart__item-price {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #2c3e50;
-  margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0;
 }
 
 .ecogab-cart__remove-item {
-  color: #e74c3c;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ecogab-cart__item:not(:last-child) {
-  margin-bottom: 15px;
-}
-
-.ecogab-cart__remove-item i {
-    font-size: 1.2rem;
-}
-
-/* Estilos para los botones */
-.ecogab-cart__summary {
+    color: #e74c3c;
+    cursor: pointer;
     display: flex;
-    gap: 1rem;
+    align-items: center;
     justify-content: center;
-    margin-top: 2rem;
-    flex-wrap: wrap;
 }
 
-.ecogab-cart__email-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.5rem;
-    background-color: #4a5568;
-    color: white;
-    border: none;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.ecogab-cart__whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background-color: #25d366;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-
-/* Efectos hover para los botones */
-.ecogab-cart__email-btn:hover {
-    background-color: #2d3748;
-    transform: translateY(-1px);
-}
-
-.ecogab-cart__whatsapp-btn:hover {
-    background-color: #128c7e;
-    transform: scale(1.05);
+/* Espaciado entre elementos */
+.ecogab-cart__item:not(:last-child) {
+    margin-bottom: 15px;
 }
 
 /* Media queries para dispositivos móviles */
 @media (max-width: 500px) {
     .ecogab-cart__item {
         display: grid;
-        grid-template-columns: 70px 1fr auto;
+        grid-template-columns: 60px 1fr auto;
         align-items: center;
         grid-template-areas: 
             "img details remove"
             "img price remove";
         gap: 0.5rem;
-        padding: 1rem;
-        position: relative;
     }
-    
-    .ecogab-cart__item-image,
-    .cart-item-image {
+
+    .ecogab-cart__item-image {
         grid-area: img;
-        /* El tamaño ya está forzado en los estilos base */
     }
-    
+
     .ecogab-cart__item-details {
         grid-area: details;
-        width: 100%;
     }
-    
+
     .ecogab-cart__item-price {
         grid-area: price;
-        align-self: start;
     }
-    
+
     .ecogab-cart__remove-item {
         grid-area: remove;
         justify-self: end;
-        align-self: center;
-    }
-
-    .ecogab-cart__item-name {
-        font-size: 0.9rem;
-    }
-
-    .ecogab-cart__email-btn,
-    .ecogab-cart__whatsapp-btn {
-        width: 100%;
-        padding: 12px;
-        font-size: 1rem;
-    }
-
-    .ecogab-cart__summary {
-        flex-direction: column;
     }
 }
 </style>
