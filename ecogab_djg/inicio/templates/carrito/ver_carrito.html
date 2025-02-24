@@ -98,12 +98,25 @@
     box-sizing: border-box;
 }
 
-/* Estilos base para las imágenes del carrito - forzamos tamaño con !important */
-.ecogab-cart__item-image {
+/* Estilo para imágenes del carrito (ambas clases para compatibilidad) */
+.ecogab-cart__item-image,
+.cart-item-image {
     width: 50px !important;
     height: 50px !important;
-    object-fit: cover;
-    border-radius: 5px;
+    object-fit: cover !important;
+    border-radius: 5px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+}
+
+/* Esto asegura que la imagen no pueda crecer más allá del tamaño especificado */
+.ecogab-cart__item img {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover !important;
+    border-radius: 5px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
 }
 
 /* Layout para items del carrito */
@@ -116,7 +129,7 @@
     align-items: center;
     width: 100%;
     max-width: 700px;
-    margin: 0 auto;
+    margin: a auto;
     box-sizing: border-box;
 }
 
@@ -218,9 +231,10 @@
         position: relative;
     }
     
-    .ecogab-cart__item-image {
+    .ecogab-cart__item-image,
+    .cart-item-image {
         grid-area: img;
-        /* El tamaño ya está forzado a 50px en los estilos base */
+        /* El tamaño ya está forzado en los estilos base */
     }
     
     .ecogab-cart__item-details {
