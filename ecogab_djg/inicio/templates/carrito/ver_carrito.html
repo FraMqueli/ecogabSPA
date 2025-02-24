@@ -88,14 +88,14 @@
 }
 
 /* Estilos para los items del carrito */
-.ecogab-cart__items {
-    margin: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    box-sizing: border-box;
+.ecogab-cart__item {
+  display: block; /* Para que cada ítem sea un bloque con 100% de ancho */
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 1rem; /* Espacio entre items */
 }
 
 /* Estilo para imágenes del carrito (ambas clases para compatibilidad) */
@@ -120,59 +120,53 @@
 }
 
 /* Layout para items del carrito */
-.ecogab-cart__item {
-    display: flex;
-    flex-direction: column;
-    background: #ffffff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-}
 .ecogab-cart__item-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+  display: flex; 
+  align-items: flex-start; /* Alinea todo arriba */
+  gap: 1rem; 
+}
+.ecogab-cart__item-link {
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
 
 .ecogab-cart__item-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;        /* Espaciado entre el nombre y la categoría */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Espacio entre nombre, categoría y precio */
 }
 
 .ecogab-cart__item-name {
-    font-weight: bold;
-    color: #333;
-    font-size: 1.1rem;
-    text-decoration: none;
-    line-height: 1.4;     /* Aumenta la altura de línea para separar mejor las líneas */
-    margin: 0;
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1rem;
+  margin: 0;
 }
 
 .ecogab-cart__item-category {
-    font-size: 0.9rem;
-    color: #777;
-    line-height: 1.4;
-    margin: 0;
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
 }
 
 .ecogab-cart__item-price {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #2c3e50;
-}
-.ecogab-cart__item:not(:last-child) {
-    margin-bottom: 15px; /* Agregar separación entre productos */
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
 }
 
 .ecogab-cart__remove-item {
-    color: #e74c3c;
-    cursor: pointer;
-    display: flex;
-    align-items: right;
-    justify-content: flex-end;
+  color: #e74c3c;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ecogab-cart__item:not(:last-child) {
+  margin-bottom: 15px;
 }
 
 .ecogab-cart__remove-item i {
@@ -295,16 +289,18 @@ function renderCart() {
         const cartItem = document.createElement("div");
         cartItem.classList.add("ecogab-cart__item");
 
+        // Ojo: aquí uso <div> en vez de <span> para nombre y categoría
+        // y separo el bloque de la imagen con el de la info y el precio.
         cartItem.innerHTML = `
             <div class="ecogab-cart__item-content">
                 <a href="/producto/${item.id}/" class="ecogab-cart__item-link">
                     <img src="${item.imagen}" alt="${item.nombre}" class="ecogab-cart__item-image">
-                    <div class="ecogab-cart__item-details">
-                        <span class="ecogab-cart__item-name">${item.nombre}</span>
-                        <span class="ecogab-cart__item-category">${item.categoria}</span>
-                    </div>
                 </a>
-                <div class="ecogab-cart__item-price">${item.precio}</div>
+                <div class="ecogab-cart__item-details">
+                    <div class="ecogab-cart__item-name">${item.nombre}</div>
+                    <div class="ecogab-cart__item-category">${item.categoria}</div>
+                    <div class="ecogab-cart__item-price">${item.precio}</div>
+                </div>
                 <div class="ecogab-cart__remove-item" onclick="removeFromCart('${item.id}')">
                     <i class="fas fa-trash"></i>
                 </div>
