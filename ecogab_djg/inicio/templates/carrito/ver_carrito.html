@@ -121,34 +121,35 @@
 
 /* Layout para items del carrito */
 .ecogab-cart__item {
-    display: flex;
-    grid-template-columns: 70px 1fr 1fr auto;
+    display: grid;
+    grid-template-columns: 70px 2fr 1fr auto;
     align-items: center;
-    gap: 1.2rem;
-    width: 100%;
-    padding: 1.2rem;
+    gap: 1rem;           /* Espacio entre las columnas */
+    padding: 1.5rem;     /* Aumenta el padding para dar más aire */
     border-bottom: 1px solid #eee;
-    max-width: 100%;
+    width: 100%;
     box-sizing: border-box;
 }
 
 .ecogab-cart__item-details {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
+    gap: 0.75rem;        /* Espaciado entre el nombre y la categoría */
 }
 
 .ecogab-cart__item-name {
     font-weight: bold;
     color: #333;
-    text-decoration: none;
+    font-size: 1.1rem;
+    line-height: 1.4;     /* Aumenta la altura de línea para separar mejor las líneas */
+    margin: 0;
 }
 
 .ecogab-cart__item-category {
     font-size: 0.9rem;
     color: #777;
+    line-height: 1.4;
+    margin: 0;
 }
 
 .ecogab-cart__item-price {
