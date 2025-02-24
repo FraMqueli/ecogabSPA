@@ -120,13 +120,20 @@
 }
 
 /* Layout para items del carrito */
-.ecogab-cart__items {
-    display: flex; /* Alinea los elementos en fila */
-    flex-direction: column; /* Organiza verticalmente */
-    gap: 10px; /* Espaciado entre ítems */
-    padding: 10px;
-    max-height: 400px; /* Evita que el carrito sea infinito */
-    overflow-y: auto; /* Activa el scroll si hay demasiados ítems */
+.ecogab-cart__item {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+.ecogab-cart__item-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .ecogab-cart__item-details {
@@ -155,6 +162,9 @@
     font-size: 1rem;
     font-weight: bold;
     color: #2c3e50;
+}
+.ecogab-cart__item:not(:last-child) {
+    margin-bottom: 15px; /* Agregar separación entre productos */
 }
 
 .ecogab-cart__remove-item {
@@ -286,18 +296,21 @@ function renderCart() {
         cartItem.classList.add("ecogab-cart__item");
 
         cartItem.innerHTML = `
-            <a href="/producto/${item.id}/" class="ecogab-cart__item-link">
-                <img src="${item.imagen}" alt="${item.nombre}" class="ecogab-cart__item-image">
-                <div class="ecogab-cart__item-details">
-                    <span class="ecogab-cart__item-name">${item.nombre}</span>
-                    <span class="ecogab-cart__item-category">${item.categoria}</span>
+            <div class="ecogab-cart__item-content">
+                <a href="/producto/${item.id}/" class="ecogab-cart__item-link">
+                    <img src="${item.imagen}" alt="${item.nombre}" class="ecogab-cart__item-image">
+                    <div class="ecogab-cart__item-details">
+                        <span class="ecogab-cart__item-name">${item.nombre}</span>
+                        <span class="ecogab-cart__item-category">${item.categoria}</span>
+                    </div>
+                </a>
+                <div class="ecogab-cart__item-price">${item.precio}</div>
+                <div class="ecogab-cart__remove-item" onclick="removeFromCart('${item.id}')">
+                    <i class="fas fa-trash"></i>
                 </div>
-            </a>
-            <div class="ecogab-cart__item-price">${item.precio}</div>
-            <div class="ecogab-cart__remove-item" onclick="removeFromCart('${item.id}')">
-                <i class="fas fa-trash"></i>
             </div>
         `;
+
         cartContainer.appendChild(cartItem);
     });
 }
